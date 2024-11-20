@@ -1,0 +1,77 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User{
+  id Int @id @default(autoincrement())
+  nome String
+  email String @unique
+  senha String
+  departamento String
+  curso String
+  foto_perfil Bytes?
+  createdAt DateTime @default(now()) //horario atual
+  updatedAt DateTime @updatedAt
+  Avaliacoes Avaliacoes[] //[] pq se relaciona com varias avalizacoes
+  Comentarios Comentarios[]
+}
+
+model Avaliacoes {
+  id Int @id @default(autoincrement())
+  userID Int 
+  conteudo String
+  createdAt DateTime @default(now()) //horario atual
+  updatedAt DateTime @updatedAt 
+  user User @relation(fields: [userID], references: [id]) //para montar relacoes
+  Comentarios Comentarios[]
+}
+
+model Comentarios {
+  id Int @id @default(autoincrement())
+  userID Int 
+  avaliacaoID Int
+  conteudo String
+  createdAt DateTime @default(now()) //horario atual
+  updatedAt DateTime @updatedAt
+  user User @relation(fields: [userID], references: [id]) //para montar relacoes. sem uso de [].
+  avaliacao Avaliacoes @relation(fields: [avaliacaoID], references: [id])
+
+}
+
+model Professor {
+  id Int @id @default(autoincrement())
+  nome String
+  departamento String
+  createdAt DateTime @default(now()) //horario atual
+  updatedAt DateTime @updatedAt
+  disciplinas Disciplina[]
+  prof_para_disciplina ProfParaDisciplina[]
+}
+model Disciplina {
+  id Int @id @default(autoincrement())
+  nome String
+  professoresID String
+  createdAt DateTime @default(now()) //horario atual
+  updatedAt DateTime @updatedAt
+  professores Professor[]
+  prof_para_disciplina ProfParaDisciplina[]
+}
+
+model ProfParaDisciplina { //para poder ter multiplos profs/disciplinas
+  id Int @id @default(autoincrement())
+  disciplinaID Int
+  professorID Int
+  createdAt DateTime @default(now()) //horario atual
+  updatedAt DateTime @updatedAt
+  professores Professor @relation(fields: [professorID], references: [id])
+  disciplinas Disciplina @relation(fields: [disciplinaID], references: [id])
+}
+

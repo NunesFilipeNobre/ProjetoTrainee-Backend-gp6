@@ -20,7 +20,7 @@ model User{
   foto_perfil Bytes?
   createdAt DateTime @default(now()) //horario atual
   updatedAt DateTime @updatedAt
-  Avaliacoes Avaliacoes[] //[] pq se relaciona com varias avalizacoes
+  Avaliacoes Avaliacoes[] //[] pq se relaciona com varias avaliacoes
   Comentarios Comentarios[]
 }
 

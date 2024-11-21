@@ -11,9 +11,6 @@ import {
 export class CreateAvaliacaoDto{
     @IsNotEmpty()
     @IsNumber()
-    id : number;
-    @IsNotEmpty()
-    @IsNumber()
     userID: number;
     @IsNotEmpty()
     @IsString()

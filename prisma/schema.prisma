@@ -30,7 +30,7 @@ model Avaliacoes {
   conteudo String
   createdAt DateTime @default(now()) //horario atual
   updatedAt DateTime @updatedAt 
-  user User @relation(fields: [userID], references: [id]) //para montar relacoes
+  user User @relation(fields: [userID], references: [id], onDelete: Cascade) //para montar relacoes
   Comentarios Comentarios[]
 }
 
@@ -41,8 +41,8 @@ model Comentarios {
   conteudo String
   createdAt DateTime @default(now()) //horario atual
   updatedAt DateTime @updatedAt
-  user User @relation(fields: [userID], references: [id]) //para montar relacoes. sem uso de [].
-  avaliacao Avaliacoes @relation(fields: [avaliacaoID], references: [id])
+  user User @relation(fields: [userID], references: [id], onDelete: Cascade) //para montar relacoes. sem uso de [].
+  avaliacao Avaliacoes @relation(fields: [avaliacaoID], references: [id], onDelete: Cascade) 
 
 }
 

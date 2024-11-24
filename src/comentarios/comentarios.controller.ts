@@ -1,4 +1,14 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, ValidationPipe } from '@nestjs/common';
+import { 
+  Body,
+  Controller,
+  Delete, 
+  Get, 
+  Param, 
+  ParseIntPipe, 
+  Patch, 
+  Post, 
+  ValidationPipe,
+} from '@nestjs/common';
 import { ComentariosService } from './comentarios.service';
 import { CreateComentariosDto } from './dto/create-comentarios.dto';
 import { UpdateComentariosDto } from './dto/update-comentarios.dto';
@@ -8,7 +18,7 @@ export class ComentariosController {
   constructor(private readonly comentariosService: ComentariosService) {}
 
   @Post()
-  async create(@Body(ValidationPipe) comentariosData:CreateComentariosDto){
+  async create(@Body(ValidationPipe) comentariosData: CreateComentariosDto){
     return await this.comentariosService.create(comentariosData);
   }
 

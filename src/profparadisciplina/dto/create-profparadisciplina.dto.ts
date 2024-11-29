@@ -1,14 +1,13 @@
 import {
     IsNotEmpty,
-    IsNumber,
+    IsNumber
   } from 'class-validator';
   
-  export class CreateProfparadisciplinaDto {
+  export class CreateProfparadisciplinaDto{
+    @IsNumber() 
     @IsNotEmpty()
-    @IsNumber()
     disciplinaID: number;
     @IsNotEmpty()
     @IsNumber()
     professorID: number;
-
   }

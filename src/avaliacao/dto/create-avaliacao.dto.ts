@@ -1,11 +1,7 @@
 import {
     IsNumber,
-    IsBase64,
-    IsEmail,
     IsNotEmpty,
-    IsOptional,
     IsString,
-    IsStrongPassword,
   } from 'class-validator';
 
 export class CreateAvaliacaoDto{

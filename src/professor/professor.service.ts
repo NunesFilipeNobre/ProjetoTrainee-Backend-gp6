@@ -15,7 +15,9 @@ export class ProfessorService {
   }
 
   async findAllProfessor() {
-    return await this.prisma.professor.findMany();
+    const professores = await this.prisma.professor.findMany({});
+    console.log(professores)
+    return professores
   }
 
   async findOneProfessor(id: number) {

@@ -27,6 +27,13 @@ export class AvaliacaoService {
             },
         });
     }
+    async findUserAvaliacao(userid: number){
+        return await this.prisma.avaliacoes.findMany({
+            where:{
+               userID:userid,
+            },
+        });
+    }
 
     async deleteAvaliacao(id: number){
         return await this.prisma.avaliacoes.delete({

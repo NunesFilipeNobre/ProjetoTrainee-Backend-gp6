@@ -15,15 +15,18 @@ export class UserService {
   }
 
   async findAll() {
-    return await this.prisma.user.findMany();
+    const usuarios = await this.prisma.user.findMany({});
+    console.log(usuarios)
+    return usuarios
   }
 
   async findOne(id: number) {
-    return await this.prisma.user.findUnique({
+    const usuario = await this.prisma.user.findUnique({
       where: {
         id: id,
       },
     });
+    return usuario
   }
 
   async del_user(id: number) {

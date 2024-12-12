@@ -21,7 +21,7 @@ export class ComentariosService {
             include: {
                 user: {
                     select: {
-                        nome: true, // Inclui apenas o campo nome do usuário
+                        nome: true, 
                     },
                 },
             },

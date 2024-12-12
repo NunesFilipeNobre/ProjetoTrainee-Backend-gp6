@@ -26,7 +26,10 @@ export class AvaliacaoController {
   async findAll() {
     return await this.avaliacaoService.findAll();
   }
-
+  @Get(':userid')
+  async findUserAvaliacao(@Param('userid', ParseIntPipe) userid: number) {
+    return await this.avaliacaoService.findUserAvaliacao(userid);
+  }
   @Get(':id')
   async findAvaliacao(@Param('id', ParseIntPipe) id: number) {
     return await this.avaliacaoService.findAvaliacao(id);

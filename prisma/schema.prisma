@@ -27,6 +27,8 @@ model User{
 model Avaliacoes {
   id Int @id @default(autoincrement())
   userID Int 
+  professorID Int?
+  disciplinaID Int?
   conteudo String
   createdAt DateTime @default(now()) //horario atual
   updatedAt DateTime @updatedAt 

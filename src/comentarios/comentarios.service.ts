@@ -16,8 +16,16 @@ export class ComentariosService {
         return comentarios;
     }
 
-    async findAll(){
-        return await this.prisma.comentarios.findMany();
+    async findAll() {
+        return await this.prisma.comentarios.findMany({
+            include: {
+                user: {
+                    select: {
+                        nome: true, // Inclui apenas o campo nome do usuário
+                    },
+                },
+            },
+        });
     }
 
     async findComentarios(id: number){

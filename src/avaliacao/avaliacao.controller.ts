@@ -7,6 +7,7 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Query,
   ValidationPipe,
 } from '@nestjs/common';
 import { AvaliacaoService } from './avaliacao.service';
@@ -26,10 +27,17 @@ export class AvaliacaoController {
   async findAll() {
     return await this.avaliacaoService.findAll();
   }
-  @Get(':userid')
+
+  @Get('professor')
+  async findByProfessor(@Query('professorID', ParseIntPipe) professorID: number) {
+    return await this.avaliacaoService.findByProfessor(professorID);
+  }
+
+  @Get('user/:userid')
   async findUserAvaliacao(@Param('userid', ParseIntPipe) userid: number) {
     return await this.avaliacaoService.findUserAvaliacao(userid);
   }
+
   @Get(':id')
   async findAvaliacao(@Param('id', ParseIntPipe) id: number) {
     return await this.avaliacaoService.findAvaliacao(id);

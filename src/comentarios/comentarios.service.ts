@@ -52,4 +52,18 @@ export class ComentariosService {
             data: data,
         });
     }
+    async getComentariosPorAvaliacao(avaliacaoID: number) {
+        return await this.prisma.comentarios.findMany({
+            where: {
+                avaliacaoID,
+            },
+            include: {
+                user: {
+                    select: {
+                        nome: true, 
+                    },
+                },
+            },
+        });
+    }
 }

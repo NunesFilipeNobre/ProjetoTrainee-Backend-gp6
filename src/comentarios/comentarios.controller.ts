@@ -32,6 +32,13 @@ export class ComentariosController {
     return await this.comentariosService.findComentarios(id);
   }
 
+  @Get('avaliacao/:avaliacaoID') 
+  async getComentariosPorAvaliacao(
+    @Param('avaliacaoID', ParseIntPipe) avaliacaoID: number
+  ) {
+    return await this.comentariosService.getComentariosPorAvaliacao(avaliacaoID);
+  }
+
   @Delete(':id')
   async deleteComentarios(@Param('id', ParseIntPipe) id: number){
     return await this.comentariosService.deleteComentarios(id);

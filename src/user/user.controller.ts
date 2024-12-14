@@ -8,10 +8,13 @@ import {
   Get,
   Delete,
   Patch,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { CurrentUser } from 'src/auth/decorators/CurrentUser.decorator';
+import { UserPayload } from 'src/auth/types/UserPayload';
 
 @Controller('user')
 export class UserController {
@@ -33,7 +36,11 @@ export class UserController {
   }
 
   @Delete(':id')
-  async del_user(@Param('id', ParseIntPipe) id: number) {
+  async del_user(@Param('id', ParseIntPipe) id: number, @CurrentUser() currentUser: UserPayload) {
+    if(id !== currentUser.sub)
+      {
+        throw new UnauthorizedException('Só é possivel atualizar as suas próprias informações')
+      }
     return await this.userService.del_user(id); //deleta um usuário específico pelo id
   }
 
@@ -41,7 +48,12 @@ export class UserController {
   async update_user(
     @Param('id', ParseIntPipe) id: number,
     @Body(ValidationPipe) data: UpdateUserDto,
+    @CurrentUser() currentUser: UserPayload
   ) {
+    if(id !== currentUser.sub)
+    {
+      throw new UnauthorizedException('Só é possivel atualizar as suas próprias informações')
+    }
     return await this.userService.update_user(id, data); //atualiza as informações de um usuário específico pelo id
   }
 }

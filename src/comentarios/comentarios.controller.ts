@@ -7,18 +7,25 @@ import {
   ParseIntPipe, 
   Patch, 
   Post, 
+  UnauthorizedException, 
   ValidationPipe,
 } from '@nestjs/common';
 import { ComentariosService } from './comentarios.service';
 import { CreateComentariosDto } from './dto/create-comentarios.dto';
 import { UpdateComentariosDto } from './dto/update-comentarios.dto';
+import { CurrentUser } from 'src/auth/decorators/CurrentUser.decorator';
+import { UserPayload } from 'src/auth/types/UserPayload';
 
 @Controller('comentarios')
 export class ComentariosController {
   constructor(private readonly comentariosService: ComentariosService) {}
 
   @Post()
-  async create(@Body(ValidationPipe) comentariosData: CreateComentariosDto){
+  async create(@Body(ValidationPipe) comentariosData: CreateComentariosDto, @CurrentUser() currentUser: UserPayload) {
+      if(comentariosData.userID !== currentUser.sub)
+      {
+        throw new UnauthorizedException('Só é possivel criar comentarios para si mesmo')
+      }
     return await this.comentariosService.create(comentariosData);
   }
 

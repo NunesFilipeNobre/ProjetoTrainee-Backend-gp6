@@ -24,10 +24,10 @@ export class AvaliacaoController {
   @Public()
   @Post()
   async create(@Body(ValidationPipe) avaliacaoData: CreateAvaliacaoDto, @CurrentUser() currentUser: UserPayload) {
-    if(avaliacaoData.userID !== currentUser.sub)
+    {/*if(avaliacaoData.userID !== currentUser.sub)
     {
       throw new UnauthorizedException('Só é possível criar avaliações para si mesmo')
-    }
+  }*/}
     return await this.avaliacaoService.create(avaliacaoData);
   }
 

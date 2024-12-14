@@ -15,6 +15,7 @@ import { CreateComentariosDto } from './dto/create-comentarios.dto';
 import { UpdateComentariosDto } from './dto/update-comentarios.dto';
 import { CurrentUser } from 'src/auth/decorators/CurrentUser.decorator';
 import { UserPayload } from 'src/auth/types/UserPayload';
+import { Public } from 'src/auth/decorators/isPublic.decorator';
 
 @Controller('comentarios')
 export class ComentariosController {
@@ -38,7 +39,7 @@ export class ComentariosController {
   async findComentarios(@Param('id', ParseIntPipe) id: number){
     return await this.comentariosService.findComentarios(id);
   }
-
+  @Public()
   @Get('avaliacao/:avaliacaoID') 
   async getComentariosPorAvaliacao(
     @Param('avaliacaoID', ParseIntPipe) avaliacaoID: number

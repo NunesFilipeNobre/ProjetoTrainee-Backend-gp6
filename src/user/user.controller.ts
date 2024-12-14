@@ -15,11 +15,13 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { CurrentUser } from 'src/auth/decorators/CurrentUser.decorator';
 import { UserPayload } from 'src/auth/types/UserPayload';
+import { Public } from 'src/auth/decorators/isPublic.decorator';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @Public()
   @Post()
   async create(@Body(ValidationPipe) userData: CreateUserDto) {
     return await this.userService.create(userData); //cria um usuário novo
@@ -29,7 +31,7 @@ export class UserController {
   async findAll() {
     return await this.userService.findAll(); //acha todos os usuários
   }
-
+  @Public()
   @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id: number) {
     return await this.userService.findOne(id); //acha um usuário específico pelo id-> localhost:3000/user/id_do_usuario

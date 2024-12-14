@@ -16,11 +16,12 @@ import { CreateAvaliacaoDto } from './dto/create-avaliacao.dto';
 import { UpdateAvaliacaoDto } from './dto/update-avaliacao.dto';
 import { CurrentUser } from 'src/auth/decorators/CurrentUser.decorator';
 import { UserPayload } from 'src/auth/types/UserPayload';
+import { Public } from 'src/auth/decorators/isPublic.decorator';
 
 @Controller('avaliacao')
 export class AvaliacaoController {
   constructor(private readonly avaliacaoService: AvaliacaoService) {}
-
+  @Public()
   @Post()
   async create(@Body(ValidationPipe) avaliacaoData: CreateAvaliacaoDto, @CurrentUser() currentUser: UserPayload) {
     if(avaliacaoData.userID !== currentUser.sub)
@@ -34,17 +35,17 @@ export class AvaliacaoController {
   async findAll() {
     return await this.avaliacaoService.findAll();
   }
-
+  @Public()
   @Get('professor')
   async findByProfessor(@Query('professorID', ParseIntPipe) professorID: number) {
     return await this.avaliacaoService.findByProfessor(professorID);
   }
-
+  @Public()
   @Get('user/:userid')
   async findUserAvaliacao(@Param('userid', ParseIntPipe) userid: number) {
     return await this.avaliacaoService.findUserAvaliacao(userid);
   }
-
+  @Public()
   @Get(':id')
   async findAvaliacao(@Param('id', ParseIntPipe) id: number) {
     return await this.avaliacaoService.findAvaliacao(id);

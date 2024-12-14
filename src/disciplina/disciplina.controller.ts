@@ -3,6 +3,7 @@ import { DisciplinaService } from './disciplina.service';
 import { createDisciplinaDto } from './dto/create-disciplina.dto';
 import { Param, ParseIntPipe} from '@nestjs/common';
 import { updateDisciplinaDto } from './dto/update-disciplina.dto';
+import { Public } from 'src/auth/decorators/isPublic.decorator';
 
 
 @Controller('disciplina') //na hora de usar o postman: http://localhost:3333/disciplina
@@ -13,7 +14,7 @@ export class DisciplinaController {
   async create(@Body(ValidationPipe) disciplinaData: createDisciplinaDto){
     return await this.disciplinaService.create(disciplinaData);
   }
-
+  @Public()
   @Get() 
     async findAll(){
       return await this.disciplinaService.findAll();

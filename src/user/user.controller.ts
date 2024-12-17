@@ -36,26 +36,26 @@ export class UserController {
   async findOne(@Param('id', ParseIntPipe) id: number) {
     return await this.userService.findOne(id); //acha um usuário específico pelo id-> localhost:3000/user/id_do_usuario
   }
-
+  @Public()
   @Delete(':id')
   async del_user(@Param('id', ParseIntPipe) id: number, @CurrentUser() currentUser: UserPayload) {
-    if(id !== currentUser.sub)
+    {if(id !== currentUser?.sub)
       {
         throw new UnauthorizedException('Só é possivel atualizar as suas próprias informações')
-      }
+      }}
     return await this.userService.del_user(id); //deleta um usuário específico pelo id
   }
-
-  @Patch(':id')
+  @Public()
+  @Patch('update/:id')
   async update_user(
     @Param('id', ParseIntPipe) id: number,
     @Body(ValidationPipe) data: UpdateUserDto,
     @CurrentUser() currentUser: UserPayload
   ) {
-    if(id !== currentUser.sub)
+    {/*if(id !== currentUser?.sub)
     {
       throw new UnauthorizedException('Só é possivel atualizar as suas próprias informações')
-    }
+    }*/}
     return await this.userService.update_user(id, data); //atualiza as informações de um usuário específico pelo id
   }
 }

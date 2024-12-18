@@ -50,12 +50,12 @@ export class AvaliacaoController {
   async findAvaliacao(@Param('id', ParseIntPipe) id: number) {
     return await this.avaliacaoService.findAvaliacao(id);
   }
-
+  @Public()
   @Delete(':id')
   async deleteAvaliacao(@Param('id', ParseIntPipe) id: number) {
     return await this.avaliacaoService.deleteAvaliacao(id);
   }
-
+  @Public()
   @Patch(':id')
   async updateAvaliacao(
     @Param('id', ParseIntPipe) id: number,

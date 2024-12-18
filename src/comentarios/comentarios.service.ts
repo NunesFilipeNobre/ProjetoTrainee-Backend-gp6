@@ -13,6 +13,7 @@ export class ComentariosService {
         const comentarios = await this.prisma.comentarios.create({
             data:data,
         });
+        console.log(data)
         return comentarios;
     }
 

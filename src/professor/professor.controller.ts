@@ -27,7 +27,7 @@ export class ProfessorController {
   async findAllProfessor(){
     return await this.professorService.findAllProfessor();
   }
-
+  @Public()
   @Get(':id')
   async findOneProfessor(@Param('id', ParseIntPipe) id: number){
     return await this.professorService.findOneProfessor(id);

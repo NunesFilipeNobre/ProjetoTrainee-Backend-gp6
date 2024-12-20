@@ -39,10 +39,10 @@ export class UserController {
   @Public()
   @Delete(':id')
   async del_user(@Param('id', ParseIntPipe) id: number, @CurrentUser() currentUser: UserPayload) {
-    {if(id !== currentUser?.sub)
+    {/*if(id !== currentUser?.sub)
       {
         throw new UnauthorizedException('Só é possivel atualizar as suas próprias informações')
-      }}
+      }*/}
     return await this.userService.del_user(id); //deleta um usuário específico pelo id
   }
   @Public()

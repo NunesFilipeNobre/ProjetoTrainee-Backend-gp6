@@ -47,6 +47,13 @@ export class AvaliacaoService {
             where:{
                 id:id,
             },
+            include: {
+                user: {
+                  select: {
+                    nome: true,
+                  },
+                },
+              }
         });
     }
     async findUserAvaliacao(userid: number){

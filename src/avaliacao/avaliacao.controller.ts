@@ -21,7 +21,7 @@ import { Public } from 'src/auth/decorators/isPublic.decorator';
 @Controller('avaliacao')
 export class AvaliacaoController {
   constructor(private readonly avaliacaoService: AvaliacaoService) {}
-  @Public()
+  
   @Post()
   async create(@Body(ValidationPipe) avaliacaoData: CreateAvaliacaoDto, @CurrentUser() currentUser: UserPayload) {
     {if(avaliacaoData.userID !== currentUser?.sub)

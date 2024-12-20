@@ -13,13 +13,26 @@ import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth/guards/auth-guard';
 
 @Module({
-  imports: [UserModule, PrismaModule, AvaliacaoModule, ComentariosModule, ProfessorModule, ProfparadisciplinaModule, DisciplinaModule, JwtModule, ConfigModule.forRoot({
-    isGlobal: true,
-  }), AuthModule],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true, 
+    }),
+    UserModule,
+    PrismaModule,
+    AvaliacaoModule,
+    ComentariosModule,
+    ProfessorModule,
+    ProfparadisciplinaModule,
+    DisciplinaModule,
+    JwtModule,
+    AuthModule,
+  ],
   controllers: [],
-  providers: [{
-    provide: APP_GUARD,
-    useClass: AuthGuard,
-  }],
+  providers: [
+    {
+      provide: APP_GUARD, 
+      useClass: AuthGuard,
+    },
+  ],
 })
 export class AppModule {}

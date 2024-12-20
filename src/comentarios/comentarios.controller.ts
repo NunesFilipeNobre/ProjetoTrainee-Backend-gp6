@@ -20,13 +20,13 @@ import { Public } from 'src/auth/decorators/isPublic.decorator';
 @Controller('comentarios')
 export class ComentariosController {
   constructor(private readonly comentariosService: ComentariosService) {}
-  @Public()
+  
   @Post()
   async create(@Body(ValidationPipe) comentariosData: CreateComentariosDto, @CurrentUser() currentUser: UserPayload) {
-      {/*if(comentariosData.userID !== currentUser.sub)
+      {if(comentariosData.userID !== currentUser.sub)
       {
         throw new UnauthorizedException('Só é possivel criar comentarios para si mesmo')
-      }*/}
+      }}
     return await this.comentariosService.create(comentariosData);
   }
 
